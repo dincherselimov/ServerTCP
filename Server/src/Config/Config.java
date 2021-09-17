@@ -17,13 +17,13 @@ public class Config {
         FileInputStream FIS;
         {
             try {
-                FIS = new FileInputStream("src/ConfigFiles/config.properties");
+                FIS = new FileInputStream("Server/src/ConfigFiles/config.properties");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         }
 
-        Properties prop = new Properties();
+        Properties prop;
 
         //Loading the config.properties file
         private Config () throws IOException {

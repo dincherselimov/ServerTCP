@@ -12,25 +12,25 @@ import java.net.*;
  */
 public class ServerTCP {
     public static void main(String[] args) throws IOException {
-try {
-    //connect to socket on host "localhost" and port 80
-    ServerSocket serverSocket = new ServerSocket(Config.getInstance().getPort());
+        try {
+            //connect to socket on host "localhost" and port 80
+            ServerSocket serverSocket = new ServerSocket(Config.getInstance().getPort());
 
-    //returns the socket and establish a connection between server and client.
-    Socket socket = serverSocket.accept();
+            //returns the socket and establish a connection between server and client.
+            Socket socket = serverSocket.accept();
 
-    //returns the InputStream attached with this socket.
-    DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+            //returns the InputStream attached with this socket.
+            DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
 
-    String str = (String) dataInputStream.readUTF();
+            String str = (String) dataInputStream.readUTF();
 
-    //print a message
-    System.out.println("Message" + " " +  str);
-    //close the socket
-    serverSocket.close();
-          }
+            //print a message
+            System.out.println("Message" + " " +  str);
+            //close the socket
+            serverSocket.close();
+        }
         catch (Exception e) {
-         e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
