@@ -30,19 +30,15 @@ public class Config {
         prop = new Properties();
         prop.load(FIS);
         FIS.close();
-//---------------------------------------------------------------------------------------------------//
         port = Integer.parseInt(prop.getProperty("port"));
     }
-
-        //Using Singleton method
+    //Using Singleton method
         public static Config getInstance() throws IOException {
         if (instance == null) {
             instance = new Config();
         }
         return instance;
     }
-
-    //-------------------------------------------------------------------------------------------//
         //Getters for strings
         public int getPort(){return this.port;}
 

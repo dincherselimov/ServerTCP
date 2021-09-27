@@ -1,7 +1,6 @@
 package com.server;
-import Config.Config;
-import org.w3c.dom.ls.LSOutput;
-import javax.sound.midi.Soundbank;
+
+import ServerSideMethods.ClientHandler;
 import java.io.*;
 import java.net.*;
 
@@ -12,27 +11,86 @@ import java.net.*;
  */
 public class ServerTCP {
     public static void main(String[] args) throws IOException {
-        try {
-            //connect to socket on host "localhost" and port 80
-            ServerSocket serverSocket = new ServerSocket(Config.getInstance().getPort());
 
-            //returns the socket and establish a connection between server and client.
-            Socket socket = serverSocket.accept();
+        //waiting for a request on port(for example 93)
+        ServerSocket socket = new ServerSocket(93);
 
-            //returns the InputStream attached with this socket.
-            DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+            while (true) {
+                //establish connection
+                Socket client = socket.accept();
+                System.out.println("Successful");
 
-            String str = (String) dataInputStream.readUTF();
+                //use separate threads
+                ClientHandler clientThread = new ClientHandler(client,args[0]);
+                new Thread(clientThread).start();
 
-            //print a message
-            System.out.println("Message" + " " +  str);
-            //close the socket
-            serverSocket.close();
         }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+
     }
-
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+//try {
+//        //connect to socket on host "localhost" and port 80
+//        ServerSocket serverSocket = new ServerSocket(Config.getInstance().getPort());
+//
+//        //returns the socket and establish a connection between server and client.
+//        Socket socket = serverSocket.accept();
+//
+//        //returns the InputStream attached with this socket.
+//        DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+//
+//        String str = (String) dataInputStream.readUTF();
+//
+//        //print a message
+//        System.out.println("Message" + " " +  str);
+//        //close the socket
+//        serverSocket.close();
+//        }
+//        catch (Exception e) {
+//        e.printStackTrace();
+//        }
+//        }
