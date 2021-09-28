@@ -21,9 +21,10 @@ public class ClientHandler extends Thread {
         if(arg.equals("1")){
             //accept files from client and save them on this location + file_name
             String location = Config.getInstance().getAbsolute_path();
+            String file_name = Config.getInstance().getFile_name();
             this.fh = new AcceptFiles(
                     new BufferedInputStream(client.getInputStream()),
-                    new BufferedOutputStream(new FileOutputStream(location + "/dincher.txt")));
+                    new BufferedOutputStream(new FileOutputStream(location + file_name )));
         }
         else if(arg.equals("2")){
             this.sf = new SearchInFile(client.getOutputStream(),client.getInputStream());

@@ -12,6 +12,7 @@ public class Config {
 
     private final int port;
     private final String absolute_path;
+    private String file_name;
     private static Config instance = null;
 
         //Define the config.properties file path
@@ -27,13 +28,14 @@ public class Config {
         Properties prop;
 
         //Loading the config.properties file
-        private Config () throws IOException {
+        public Config() throws IOException {
         prop = new Properties();
         prop.load(FIS);
         FIS.close();
         //reading the element's content from config.properties
         port = Integer.parseInt(prop.getProperty("port"));
         absolute_path = new String(prop.getProperty("absolute_path"));
+        file_name = new String(prop.getProperty("file_name"));
     }
     //Using Singleton method
         public static Config getInstance() throws IOException {
@@ -47,4 +49,6 @@ public class Config {
         public int getPort(){return this.port;}
 
         public String getAbsolute_path(){return this.absolute_path;}
+
+        public String getFile_name(){return this.file_name;}
 }
