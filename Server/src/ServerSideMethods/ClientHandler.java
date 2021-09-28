@@ -13,20 +13,32 @@ public class ClientHandler extends Thread {
     private SearchInFile sf;
     private final Socket client;
     private String arg;
+    BufferedReader inputStream;
+    String[] args;
     //private final SearchString searchString;
 
-    public ClientHandler(Socket socket, String arg) throws IOException {
-        this.arg = arg;
+    public ClientHandler(Socket socket) throws IOException {
+
         this.client = socket;
-        if(arg.equals("1")){
+        inputStream = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+        String s = inputStream.readLine();
+        System.out.println(s);
+        while ((s == null)){
+            s = inputStream.readLine();
+
+        }
+        args = s.split(";");
+
+        if(args[0].equals("1")){
             //accept files from client and save them on this location + file_name
             String location = Config.getInstance().getAbsolute_path();
             String file_name = Config.getInstance().getFile_name();
             this.fh = new AcceptFiles(
                     new BufferedInputStream(client.getInputStream()),
-                    new BufferedOutputStream(new FileOutputStream(location + file_name )));
+                    new BufferedOutputStream(new FileOutputStream(location + args[1] )));
         }
-        else if(arg.equals("2")){
+        else if(args[0].equals("2")){
             this.sf = new SearchInFile(client.getOutputStream(),client.getInputStream());
         }
     }
@@ -37,10 +49,10 @@ public class ClientHandler extends Thread {
     @Override
     public void run() {
         try {
-            if(arg.equals("1")){
+            if(args[0].equals("1")){
                 this.fh.AcceptFileFromClient(fh);
             }
-            else if(arg.equals("2")){
+            else if(args[0].equals("2")){
                 this.sf.SearchStringInFile();
             }
         } catch (IOException e) {

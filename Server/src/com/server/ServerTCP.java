@@ -22,11 +22,10 @@ public class ServerTCP {
                 System.out.println("Successful");
 
                 //use separate threads
-                ClientHandler clientThread = new ClientHandler(client,args[0]);
+                ClientHandler clientThread = new ClientHandler(client);
                 new Thread(clientThread).start();
 
         }
-
     }
 }
 
