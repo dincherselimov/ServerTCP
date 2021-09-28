@@ -2,6 +2,7 @@ package ServerSideMethods;
 
 import java.io.*;
 import java.net.Socket;
+import Config.Config;
 
 /**
  * This class handles multiple client connection using Threads(which implements class Runnable)
@@ -18,10 +19,11 @@ public class ClientHandler extends Thread {
         this.arg = arg;
         this.client = socket;
         if(arg.equals("1")){
-            String location = "D:\\Manik\\ServerTCP\\Server\\src\\SavedFiles";
+            //accept files from client and save them on this location + file_name
+            String location = Config.getInstance().getAbsolute_path();
             this.fh = new AcceptFiles(
                     new BufferedInputStream(client.getInputStream()),
-                    new BufferedOutputStream(new FileOutputStream(location +"/d2.txt")));
+                    new BufferedOutputStream(new FileOutputStream(location + "/dincher.txt")));
         }
         else if(arg.equals("2")){
             this.sf = new SearchInFile(client.getOutputStream(),client.getInputStream());

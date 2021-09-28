@@ -3,6 +3,7 @@ package com.server;
 import ServerSideMethods.ClientHandler;
 import java.io.*;
 import java.net.*;
+import Config.Config;
 
 /**
  * The ServerTCP class makes a connection with host 127.0.0.1 on port 80(what we have defined in config.properties)
@@ -13,7 +14,7 @@ public class ServerTCP {
     public static void main(String[] args) throws IOException {
 
         //waiting for a request on port(for example 93)
-        ServerSocket socket = new ServerSocket(93);
+        ServerSocket socket = new ServerSocket(Config.getInstance().getPort());
 
             while (true) {
                 //establish connection

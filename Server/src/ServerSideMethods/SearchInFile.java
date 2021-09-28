@@ -1,5 +1,7 @@
 package ServerSideMethods;
 
+import Config.Config;
+
 import java.io.*;
 
 /**
@@ -20,8 +22,9 @@ public class SearchInFile {
     }
 
     public void SearchStringInFile() throws IOException {
+        // Search for a string in file on this location path + file_name
+        String location = Config.getInstance().getAbsolute_path();
 
-        String location = "D:\\Manik\\ServerTCP\\Server\\src\\SavedFiles\\";
         //Creation of File Descriptor for input file
         File f  = new File( location + "/d1.txt");
 
@@ -37,11 +40,11 @@ public class SearchInFile {
 
         //reading the given String from the client and if the string is not read continue reading
         String s = null;
-        s = br.readLine();
+        s = input.readLine();
 
         while ((s == null)){
             try {
-                s = br.readLine();
+                s = input.readLine();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -55,12 +58,12 @@ public class SearchInFile {
         while(true)
         {
             try {
-                if ((s = br.readLine()) == null) break;
+                if ((ss = br.readLine()) == null) break;
             } catch (IOException e) {
                 e.printStackTrace();
             }
             //Split the word using space
-            words=s.split(" ");
+            words=ss.split(" ");
             for (String word : words)
             {
                 //Search for the given word

@@ -11,13 +11,14 @@ import java.util.Properties;
 public class Config {
 
     private final int port;
+    private final String absolute_path;
     private static Config instance = null;
 
         //Define the config.properties file path
         FileInputStream FIS;
         {
             try {
-                FIS = new FileInputStream("Server/src/ConfigFiles/config.properties");
+                FIS = new FileInputStream("D:\\Manik\\ServerTCP\\Server\\src\\ConfigFiles\\config.properties");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -30,7 +31,9 @@ public class Config {
         prop = new Properties();
         prop.load(FIS);
         FIS.close();
+        //reading the element's content from config.properties
         port = Integer.parseInt(prop.getProperty("port"));
+        absolute_path = new String(prop.getProperty("absolute_path"));
     }
     //Using Singleton method
         public static Config getInstance() throws IOException {
@@ -39,7 +42,9 @@ public class Config {
         }
         return instance;
     }
-        //Getters for strings
+       //---------------------------------------------------------------------//
+        //Getters
         public int getPort(){return this.port;}
 
+        public String getAbsolute_path(){return this.absolute_path;}
 }
