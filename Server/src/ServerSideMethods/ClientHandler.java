@@ -13,8 +13,14 @@ public class ClientHandler extends Thread {
     private SearchInFile sf;
     private final Socket client;
     private String arg;
-    //private final SearchString searchString;
 
+    /**
+     * 1- stands for acceptFileFromClient
+     * 2- stands for searchStringInFile
+     * @param socket
+     * @param arg
+     * @throws IOException
+     */
     public ClientHandler(Socket socket, String arg) throws IOException {
         this.arg = arg;
         this.client = socket;
@@ -30,18 +36,18 @@ public class ClientHandler extends Thread {
             this.sf = new SearchInFile(client.getOutputStream(),client.getInputStream());
         }
     }
+
     /**
-     * This method accepts a file sent by the client.java class
-     * The method reads the whole content of the file and saves it to a certain directory
+     * invoking the serverside methods
      */
     @Override
     public void run() {
         try {
             if(arg.equals("1")){
-                this.fh.AcceptFileFromClient(fh);
+                this.fh.acceptFileFromClient(fh);
             }
             else if(arg.equals("2")){
-                this.sf.SearchStringInFile();
+                this.sf.searchStringInFile();
             }
         } catch (IOException e) {
             e.printStackTrace();

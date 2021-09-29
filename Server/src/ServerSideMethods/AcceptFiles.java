@@ -9,16 +9,24 @@ import java.io.IOException;
  * and saves the file to a certain directory
  */
 public class AcceptFiles {
-    private BufferedInputStream bis;
-    private BufferedOutputStream bos;
+    private BufferedInputStream bis = null;
+    private BufferedOutputStream bos = null;
 
-    //Create a constructor
+    /**
+     * @param bufferedInputStream
+     * @param bufferedOutputStream
+     */
     public AcceptFiles(BufferedInputStream bufferedInputStream, BufferedOutputStream bufferedOutputStream) {
         this.bis = bufferedInputStream;
         this.bos = bufferedOutputStream;
     }
 
-    public void AcceptFileFromClient(AcceptFiles fh) throws IOException {
+    /**
+     * Reading the content of file and writing it
+     * @param fh
+     * @throws IOException
+     */
+    public void acceptFileFromClient(AcceptFiles fh) throws IOException {
 
         //Create byte array
         byte[] b = new byte[1024 * 8];

@@ -14,14 +14,24 @@ public class SearchInFile {
     //sending info to the other socket(client)
     PrintWriter out;
 
-    //Constructor with parameters
+    /**
+     * Read data and send response
+     * @param outputStream
+     * @param inputStream
+     */
     public SearchInFile(OutputStream outputStream, InputStream inputStream){
         this.input = new BufferedReader(new InputStreamReader(inputStream));
         this.out = new PrintWriter(outputStream);
 
     }
 
-    public void SearchStringInFile() throws IOException {
+    /**
+     * Read the content of file
+     * Search for a certain string
+     * Return a response
+     * @throws IOException
+     */
+    public void searchStringInFile() throws IOException {
         // Search for a string in file on this location path + file_name
         String location = Config.getInstance().getAbsolute_path();
 
