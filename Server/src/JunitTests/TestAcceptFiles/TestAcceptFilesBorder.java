@@ -1,33 +1,25 @@
-package JunitTests;
+package JunitTests.TestAcceptFiles;
 
-import Config.Config;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import static org.junit.Assert.assertTrue;
 
-public class TestServerDownloadedFile {
+public class TestAcceptFilesBorder {
 
-    /**
-     * This Junit test is testing if there is downloaded file from TCP Server using java.nio.file package
-     * @assertEquals  Checks the two paths
-     */
-
-    @Test
-
+@Test
     public void testPathFile() throws IOException {
-        /**
-         * @param
-         * @filePath String with path to file
-         */
-        Config config = new Config();
-        String filepath = config.getAbsolute_path()+config.getFile_name();
 
-        Path path = Paths.get(filepath);
+        File filepath = new File("D:\\Manik\\ServerTCP\\Server\\src\\SavedFiles\\d1.txt");
+
+        boolean empty = !(filepath.length() == 0);
+
+        Path path = Paths.get(String.valueOf(filepath));
         //Method to test if file exists
         boolean exists = Files.exists(path);
         //Method to check if file does not exist
@@ -47,9 +39,14 @@ public class TestServerDownloadedFile {
         else {
             System.out.println("Program doesn't have access to the file!!");
         }
+
+        System.out.println("There is a file with that name but the content is empty!!");
         //Compares the two names
-        assertEquals("D:\\Java\\ServerTCP\\Server\\src\\SavedFiles\\testfile.txt", filepath);
-        System.out.println("Names are equal!!");
+        assertTrue(empty);
 
     }
+
+
+
+
 }

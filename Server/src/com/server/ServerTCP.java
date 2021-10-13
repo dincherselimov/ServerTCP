@@ -1,9 +1,11 @@
 package com.server;
 
-import ServerSideMethods.ClientHandler;
-import java.io.*;
-import java.net.*;
 import Config.Config;
+import ServerSideMethods.ClientHandler;
+
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 /**
  * The ServerTCP class makes a connection with host 127.0.0.1 on port 80(what we have defined in config.properties)
@@ -26,7 +28,6 @@ public class ServerTCP {
                 new Thread(clientThread).start();
 
         }
-
     }
 }
 

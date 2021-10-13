@@ -25,18 +25,22 @@ public class SearchInFile {
 
     }
 
+
     /**
      * Read the content of file
      * Search for a certain string
      * Return a response
      * @throws IOException
+     * @return
      */
-    public void searchStringInFile() throws IOException {
+    public String searchStringInFile() throws IOException {
+
         // Search for a string in file on this location path + file_name
         String location = Config.getInstance().getAbsolute_path();
+        String file_name = Config.getInstance().getFile_name();
 
         //Creation of File Descriptor for input file
-        File f  = new File( location + "/d1.txt");
+        File f  = new File( location + file_name);
 
         //Creation of File Reader object
         FileReader fr = null;
@@ -92,5 +96,6 @@ public class SearchInFile {
             out.flush();
         }
         fr.close();
+        return s;
     }
 }
